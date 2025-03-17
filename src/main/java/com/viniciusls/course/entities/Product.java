@@ -12,9 +12,11 @@ import java.util.Set;
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    public Product(){}
 
-    public Product(Long id,String name,String description,Double price,String imgUrl){
+    public Product() {
+    }
+
+    public Product(Long id, String name, String description, Double price, String imgUrl) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -22,6 +24,14 @@ public class Product implements Serializable {
         this.imgUrl = imgUrl;
     }
 
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    @ManyToMany
+    @JoinTable(name = "tb_product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
     @Id
@@ -71,6 +81,7 @@ public class Product implements Serializable {
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -78,6 +89,7 @@ public class Product implements Serializable {
         Product product = (Product) o;
         return Objects.equals(id, product.id);
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(id);
