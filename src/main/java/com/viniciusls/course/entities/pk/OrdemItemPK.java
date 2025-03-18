@@ -1,5 +1,6 @@
 package com.viniciusls.course.entities.pk;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.viniciusls.course.entities.Order;
 import com.viniciusls.course.entities.Product;
 import jakarta.persistence.Embeddable;
@@ -28,6 +29,7 @@ public class OrdemItemPK implements Serializable {
     public void setOrder(Order order) {
         this.order = order;
     }
+
 
     public Product getProduct() {
         return product;

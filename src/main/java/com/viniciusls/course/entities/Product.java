@@ -1,5 +1,6 @@
 package com.viniciusls.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -12,6 +13,9 @@ import java.util.Set;
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>();
+
 
     public Product() {
     }
@@ -76,6 +80,15 @@ public class Product implements Serializable {
 
     public String getImgUrl() {
         return imgUrl;
+    }
+
+    @JsonIgnore
+    public Set<Order> getOrders() {
+        Set<Order> set = new HashSet<>();
+        for (OrderItem x : items){
+            set.add(x.getOrder());
+        }
+        return set;
     }
 
     public void setImgUrl(String imgUrl) {
