@@ -67,6 +67,13 @@ public class Order implements Serializable {
     public User getClient() {
         return client;
     }
+    public Double getTotal(){
+        double sum = 0.0;
+        for(OrderItem x : items){
+            sum = sum + x.getSubTotal();
+        }
+        return sum;
+    }
 
     public void setClient(User client) {
 
@@ -109,6 +116,8 @@ public class Order implements Serializable {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+
 
 
 }
